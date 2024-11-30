@@ -1,0 +1,65 @@
+@keyframes cursor {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.navBar {
+  align-items: center;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-bottom: 1px solid #efefef;
+  width: 100%;
+  z-index: 19;
+  background-color: #1a1a1d;
+  font-size: 20px;
+  .navItems {
+    width: 960px;
+    padding: 16px 16px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .left,
+    .right {
+      display: flex;
+      gap: 24px;
+      .name {
+        cursor: pointer;
+        color: #a8cd89;
+      }
+    }
+    .active {
+      color: #ffb26f !important;
+    }
+    .left {
+      color: #80c4e9;
+      .title {
+        cursor: pointer;
+      }
+      .talks {
+        position: relative;
+        color: #7ed4ad;
+        cursor: pointer;
+        &::after {
+          content: "";
+          width: 4px;
+          height: 18px;
+          background-color: #7ed4ad;
+          position: absolute;
+          right: -20px;
+          top: 50%;
+          transform: translateY(-50%);
+          animation: cursor 0.8s infinite;
+        }
+      }
+    }
+  }
+}
