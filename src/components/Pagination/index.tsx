@@ -2,7 +2,7 @@ import styles from "./index.module.less";
 
 export interface PaginationProps {
   pageNum: number;
-  maxPageNum: number;
+  maxPageNum?: number;
   hasNextPage?: boolean;
   onPageChange: (pageNum: number) => void;
 }
@@ -19,14 +19,23 @@ export function Pagination({
   };
   return (
     <div className={styles.pagination}>
-      <span>
-        Page:{pageNum} / {maxPageNum}
-      </span>
+      {maxPageNum && (
+        <span>
+          Page:{pageNum} / {maxPageNum}
+        </span>
+      )}
+
       {hasPrevPage && (
-        <span className={styles.btn} onClick={() => handlePageChange(false)}>{`<- Prev Page `}</span>
+        <span
+          className={styles.btn}
+          onClick={() => handlePageChange(false)}
+        >{`<- Prev Page `}</span>
       )}
       {hasNextPage && (
-        <span className={styles.btn} onClick={() => handlePageChange(true)}>{`Next Page ->`}</span>
+        <span
+          className={styles.btn}
+          onClick={() => handlePageChange(true)}
+        >{`Next Page ->`}</span>
       )}
     </div>
   );

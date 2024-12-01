@@ -1,6 +1,6 @@
 import styles from "./index.module.less";
 import { NavBar } from "../NavBar";
-import { Outlet, useNavigate,useParams } from "react-router";
+import { Outlet,useParams } from "react-router";
 import { useQuery } from "@apollo/client";
 import { getSeries } from "@/queries";
 import { USER_ID } from "@/constants";
@@ -8,7 +8,7 @@ import type { QuerySeriesResult } from "@/types";
 import { useMemo } from "react";
 
 export function Layout() {
-  const nav = useNavigate();
+
   const {id} = useParams()
   const { data } = useQuery<QuerySeriesResult>(getSeries, {
     variables: { id: USER_ID },
@@ -28,20 +28,10 @@ export function Layout() {
       .filter((item) => !!item.id);
   }, [data,id]);
 
-  // 点击事件
-  const handleNavClick = (type: string, id: string) => {
-    if (type === "home") {
-      nav("/");
-    } else if (type == "talks") {
-      nav("/talks");
-    } else {
-      nav(`/posts/${id}`);
-    }
-  };
 
   return (
     <>
-      <NavBar title="Wong" items={series} onNavClick={handleNavClick} />
+      <NavBar title="Wong's Blog" items={series} />
       <div className={styles.layout}>
         <div className={styles.container}>
           <Outlet/>

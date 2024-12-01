@@ -10,6 +10,25 @@
   }
 }
 
+@keyframes breath {
+	0% {
+		opacity: 1.0;
+	}
+  25% {
+    opacity: 0.6;
+  }
+	50% {
+		opacity: 0.3;
+	}
+	75% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
+
 .navBar {
   align-items: center;
   position: fixed;
@@ -34,15 +53,22 @@
       .name {
         cursor: pointer;
         color: #a8cd89;
+        &:hover {
+          color: #ffb26f;
+        }
       }
     }
     .active {
       color: #ffb26f !important;
     }
     .left {
-      color: #80c4e9;
       .title {
+        color: #80c4e9;
         cursor: pointer;
+        animation-name: breath;
+        animation-duration: 4s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
       }
       .talks {
         position: relative;
@@ -59,6 +85,10 @@
           transform: translateY(-50%);
           animation: cursor 0.8s infinite;
         }
+      }
+      .search {
+        color: #ffb26f;
+        cursor: pointer;
       }
     }
   }

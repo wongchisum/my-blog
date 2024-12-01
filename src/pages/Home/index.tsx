@@ -4,7 +4,7 @@ import { useLazyQuery } from "@apollo/client";
 import { USER_ID } from "@/constants";
 import type { QueryPostsResult } from "@/types";
 import { useEffect, useMemo, useState } from "react";
-import { PostList, Pagination } from "@/components";
+import { PostList, Pagination, Loading } from "@/components";
 import { useRef } from "react";
 import type { PostListProps } from "@/components";
 
@@ -61,13 +61,18 @@ export function Home() {
 
   return (
     <div>
+      {
+        loading && <Loading />
+      }
       <PostList data={posts} />
-      <Pagination
-        maxPageNum={maxPageNum}
-        pageNum={pageNum}
-        hasNextPage={hasNextPage}
-        onPageChange={handleNextPage}
-      />
+      {posts.length > 0 && (
+        <Pagination
+          maxPageNum={maxPageNum}
+          pageNum={pageNum}
+          hasNextPage={hasNextPage}
+          onPageChange={handleNextPage}
+        />
+      )}
     </div>
   );
 }

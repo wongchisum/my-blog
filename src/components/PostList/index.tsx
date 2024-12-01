@@ -19,7 +19,7 @@ export function PostList({ data }: PostListProps) {
         const seriesName = item?.series?.name ? `[${item.series.name}]` : ""
 
         return (
-          <div className={styles.postList} key={item.id}>
+          <div className={styles.postList} key={item.id} onClick={() => handleClick(item.slug)}>
             <div className={styles.content}>
               <div className={styles.title}>{`${seriesName} ${item.title}`}</div>
               <div className={styles.brief}>{item.brief}</div>

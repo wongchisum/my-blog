@@ -1,11 +1,13 @@
+type PageInfo = {
+  endCursor: string;
+  hasNextPage: boolean;
+};
+
 export interface QueryPostsResult {
   publication: {
     posts: {
       edges: PostItem[];
-      pageInfo: {
-        endCursor: string;
-        hasNextPage: boolean;
-      };
+      pageInfo: PageInfo;
       totalDocuments: number;
     };
   };
@@ -15,10 +17,7 @@ export interface QuerySeriesResult {
   publication: {
     seriesList: {
       edges: PostItem[];
-      pageInfo: {
-        endCursor: string;
-        hasNextPage: boolean;
-      };
+      pageInfo: PageInfo;
       totalDocuments: number;
     };
   };
@@ -26,10 +25,16 @@ export interface QuerySeriesResult {
 
 export interface QueryPostDetailResult {
   publication: {
-    post:PostItem["node"]
+    post: PostItem["node"];
   };
 }
 
+export interface QueryPostsByTitleResult {
+  searchPostsOfPublication: {
+    edges: PostItem[];
+    pageInfo: PageInfo;
+  };
+}
 
 export interface PostItem {
   node: {

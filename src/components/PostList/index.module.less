@@ -4,10 +4,20 @@
   border-radius: 6px;
   margin: 24px 0;
   line-height: 2;
+  transition: 0.3s;
+  &:hover {
+    border-color: #ffb26f;
+    .title {
+      color:  #ffb26f;
+    }
+    .brief {
+      color:#F5F5F5;
+    }
+  }
   .title {
     font-size: 24px;
     margin-bottom: 24px;
-    color: #A1EEBD;
+    color: #a1eebd;
   }
   .brief {
     font-size: 18px;
@@ -16,6 +26,7 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
+    color: #ECDFCC;
   }
   .more {
     margin-top: 24px;
@@ -23,7 +34,7 @@
     cursor: pointer;
     color: #80c4e9;
     &:hover {
-      color: #FFB26F;
+      color: #ffb26f;
     }
   }
 }

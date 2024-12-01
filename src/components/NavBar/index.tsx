@@ -1,51 +1,64 @@
 import styles from "./index.module.less";
+import { useNavigate } from "react-router";
 
 interface NavItem {
   name: string;
   id: string;
-  active?:boolean
+  active?: boolean;
 }
 
-type NavEventType = "series" | "home" | "talks";
+type NavEventType = "series" | "home" | "talks" | "search";
 
 export interface NavBarProps {
   logoSrc?: string;
   title?: string;
   items: NavItem[];
-  onNavClick: (type: NavEventType, ...args: any[]) => void;
 }
 
 export function NavBar(props: NavBarProps) {
-  const { logoSrc, title, items = [], onNavClick } = props;
+  const { logoSrc, title, items = [] } = props;
+  const nav = useNavigate();
 
-  // 左侧点击
-  const handleHome = () => {
-    onNavClick("home")
+  const handleClick = (type: NavEventType, id?: string) => {
+    switch (type) {
+      case "home":
+        nav("/");
+        break;
+      case "talks":
+        nav("/talks");
+        break;
+      case "search":
+        nav("/search");
+        break;
+      case "series":
+        nav(`/posts/${id}`);
+        break;
+      default:
+        break;
+    }
   };
 
-  // 右侧点击
-  const handleSeriesClick = (id: string) => {
-    onNavClick("series", id);
-  };
-
-  // 点击内容
-  const handleTalk = () => {
-    onNavClick("talks");
-  }
   return (
     <div className={styles.navBar}>
       <div className={styles.navItems}>
-        <div className={styles.left} >
+        <div className={styles.left}>
           {logoSrc && <img src={logoSrc} />}
-          <div className={styles.title} onClick={handleHome}>{title}</div>
-          <div className={styles.talks} onClick={handleTalk}>Talks</div>
+          <div className={styles.title} onClick={() => handleClick("home")}>
+            {title}
+          </div>
+          <div className={styles.search} onClick={() => handleClick("search")}>
+            Search
+          </div>
+          <div className={styles.talks} onClick={() => handleClick("talks")}>
+            Talks
+          </div>
         </div>
         <div className={styles.right}>
           {items.map((item) => (
             <div
               key={item.id}
               className={`${styles.name} ${item.active ? styles.active : ""}`}
-              onClick={() => handleSeriesClick(item.id)}
+              onClick={() => handleClick("series", item.id)}
             >
               {item.name}
             </div>
